@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 cp /tmp/workspace/ s3://iam.william-lee.com/ --recursive --include "*" --exclude "node_modules/*" --exclude "src/*" --exclude ".*" --exclude "package.json" --exclude "tsconfig.json" --exclude "webpack.config.js" --exclude "yarn.lock"
+            aws s3 cp /tmp/workspace/ s3://iam.william-lee.com/ --recursive --include "*" --exclude "node_modules/*" --exclude "terraform/*" --exclude "src/*" --exclude ".*" --exclude "package.json" --exclude "tsconfig.json" --exclude "webpack.config.js" --exclude "yarn.lock"
 
 workflows:
   version: 2

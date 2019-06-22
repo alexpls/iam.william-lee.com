@@ -4,7 +4,7 @@ export class CanvasCreator {
     canvas.style.position = 'absolute'
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
-    document.body.appendChild(canvas)
+    document.body.prepend(canvas)
     return canvas
   }
 }

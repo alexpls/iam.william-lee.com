@@ -1,0 +1,62 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          Name: Install node dependencies
+          command: yarn
+
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .
+
+  deploy:
+    docker:
+      - image: circleci/python:latest
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - run:
+          name: Install dependencies
+          command: sudo pip install awscli
+
+      - run:
+          name: Deploy to S3
+          command: |
+            aws s3 cp /tmp/workspace/ s3://iam.william-lee.com/ --recursive --include "*" --exclude "node_modules/*" --exclude "src/*" --exclude ".*" --exclude "package.json" --exclude "tsconfig.json" --exclude "webpack.config.js" --exclude "yarn.lock"
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

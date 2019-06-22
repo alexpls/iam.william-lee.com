@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "dist",
+    "target": "es5",
+    "lib": ["es7", "dom"]
+  },
+  "include": ["./**/*.ts"]
+}

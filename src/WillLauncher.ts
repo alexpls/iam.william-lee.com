@@ -43,6 +43,7 @@ export class WillLauncher {
     }, false)
 
     document.addEventListener('touchmove', (e: TouchEvent) => {
+      e.preventDefault()
       Array.from(e.changedTouches).forEach(touch =>
         this.launch(new Point(touch.pageX, touch.pageY))
       )

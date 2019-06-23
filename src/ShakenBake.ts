@@ -2,10 +2,6 @@ import { WillHeadImage } from './WillHeadImage'
 
 const shake = require('shake.js')
 
-interface Shake {
-  start: Function
-}
-
 export class ShakenBake {
 
   shakeInstance: any
@@ -15,12 +11,14 @@ export class ShakenBake {
       threshold: 15,
       timeout: 1000
     })
+
     this.shakeInstance.start()
 
-    document.addEventListener('shake', this.shakeEvent.bind(this), false);
+    window.addEventListener('shake', this.shakeEvent.bind(this), false);
   }
 
   private shakeEvent (event) {
+    alert('shooketh')
     this.image.nextImage()
   }
 }

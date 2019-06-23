@@ -5,12 +5,18 @@ import { ImageParticle } from './ImageParticle'
 import { Point } from './Point'
 import { CanvasCreator } from './CanvasCreator'
 import { Size } from './Size'
+import { randomNumberBetween } from './randomNumberBetween';
 
 export class WillLauncher {
   private image = new WillHeadImage()
   private wills: ImageParticle[] = []
   private canvas = new CanvasCreator().createAndAddToDocument()
+  private _isAutoLaunching = false
   private konami = new Konami(this.image)
+
+  get isAutoLaunching (): boolean {
+    return this._isAutoLaunching
+  }
 
   launch (fromPosition: Point): void {
     const will = new ImageParticle(
@@ -22,6 +28,15 @@ export class WillLauncher {
       this.canvas.getContext('2d')
     )
     this.wills.push(will)
+  }
+
+  toggleAutoLaunch (): void {
+    if (this.isAutoLaunching) {
+      this._isAutoLaunching = false
+    } else {
+      this._isAutoLaunching = true
+      this.autoLaunch()
+    }
   }
 
   listenForDomEventsAndLaunchWills (): void {
@@ -64,5 +79,25 @@ export class WillLauncher {
       }
     })
     requestAnimationFrame(this.animate.bind(this))
+  }
+
+  private autoLaunch (): void {
+    if (!this.isAutoLaunching) {
+      return
+    }
+
+    setTimeout(() => {
+      this.launchAtRandomPosition()
+      this.autoLaunch()
+    }, randomNumberBetween(100, 300))
+  }
+
+  private launchAtRandomPosition (): void {
+    const halfCanvasHeight = this.canvas.height / 2
+    const randomPosition = new Point(
+      randomNumberBetween(0, this.canvas.width),
+      randomNumberBetween(30, halfCanvasHeight),
+    )
+    this.launch(randomPosition)
   }
 }

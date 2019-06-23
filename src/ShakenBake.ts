@@ -2,13 +2,14 @@ import { WillHeadImage } from './WillHeadImage'
 
 const shake = require('shake.js')
 
+// TODO: damn this doesn't work.
 export class ShakenBake {
 
   shakeInstance: any
 
   constructor (private readonly image: WillHeadImage) {
     this.shakeInstance = new shake({
-      threshold: 15,
+      threshold: 0,
       timeout: 1000
     })
 
@@ -18,7 +19,6 @@ export class ShakenBake {
   }
 
   private shakeEvent (event) {
-    alert('shooketh')
     this.image.nextImage()
   }
 }

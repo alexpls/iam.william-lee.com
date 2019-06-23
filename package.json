@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^12.0.10",
     "ts-loader": "^6.0.2",
     "typescript": "^3.5.1",
     "webpack": "^4.33.0",
@@ -13,5 +14,8 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "serve": "python -m SimpleHTTPServer 4000"
+  },
+  "dependencies": {
+    "shake.js": "^1.2.2"
   }
 }

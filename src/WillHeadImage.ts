@@ -1,23 +1,31 @@
 import { Size } from './Size'
 import { Point } from './Point'
 
-const PATH_TO_IMAGE = '/will.png'
+const IMAGES = ['/will.png', './will2.png', './will3.png']
+const DEFAULT_PATH_TO_IMAGE = IMAGES[0]
 
 export class WillHeadImage {
   readonly size: Size = new Size(120, 183)
   readonly offset: Point = new Point(0, 0)
-  private imageElementCached: HTMLImageElement
+  private imageElementCached: HTMLImageElement | undefined
+
+  private lastImageIndex = 0
 
   get imageElement (): HTMLImageElement {
     if (!this.imageElementCached) {
-      this.imageElementCached = this.createImageElement()
+      this.imageElementCached = this.createImageElement(DEFAULT_PATH_TO_IMAGE)
     }
     return this.imageElementCached
   }
 
-  private createImageElement (): HTMLImageElement {
+  nextImage (): void {
+    const nextImage = this.lastImageIndex < IMAGES.length - 1 ? ++this.lastImageIndex : 0
+    this.imageElementCached = this.createImageElement(IMAGES[nextImage])
+  }
+
+  private createImageElement (imagePath: string): HTMLImageElement {
     const image = document.createElement('img')
-    image.src = PATH_TO_IMAGE
+    image.src = imagePath
     return image
   }
 }

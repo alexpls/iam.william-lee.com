@@ -1,3 +1,5 @@
+import { Konami } from './Konami'
+import { ShakenBake } from './ShakenBake'
 import { WillHeadImage } from './WillHeadImage'
 import { ImageParticle } from './ImageParticle'
 import { Point } from './Point'
@@ -8,7 +10,8 @@ export class WillLauncher {
   private image = new WillHeadImage()
   private wills: ImageParticle[] = []
   private canvas = new CanvasCreator().createAndAddToDocument()
-  
+  private konami = new Konami(this.image)
+
   launch (fromPosition: Point): void {
     const will = new ImageParticle(
       fromPosition,
@@ -48,6 +51,9 @@ export class WillLauncher {
         this.launch(new Point(touch.pageX, touch.pageY))
       )
     }, false)
+
+    this.konami.listen()
+    new ShakenBake(this.image)
   }
 
   animate (): void {

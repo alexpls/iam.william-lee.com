@@ -19,7 +19,7 @@ export class WillHeadImage {
   }
 
   nextImage (): void {
-    const nextImage = this.lastImageIndex <= IMAGES.length - 1 ? ++this.lastImageIndex : 0
+    const nextImage = this.lastImageIndex < IMAGES.length - 1 ? ++this.lastImageIndex : 0
     this.imageElementCached = this.createImageElement(IMAGES[nextImage])
   }
 

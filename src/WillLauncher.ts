@@ -1,10 +1,11 @@
-import { CanvasCreator } from './CanvasCreator'
-import { ImageParticle } from './ImageParticle'
 import { Konami } from './Konami'
-import { Point } from './Point'
-import { randomNumberBetween } from './randomNumberBetween';
-import { Size } from './Size'
+import { ShakenBake } from './ShakenBake'
 import { WillHeadImage } from './WillHeadImage'
+import { ImageParticle } from './ImageParticle'
+import { Point } from './Point'
+import { CanvasCreator } from './CanvasCreator'
+import { Size } from './Size'
+import { randomNumberBetween } from './randomNumberBetween';
 
 export class WillLauncher {
   private image = new WillHeadImage()
@@ -67,6 +68,7 @@ export class WillLauncher {
     }, false)
 
     this.konami.listen()
+    new ShakenBake(this.image)
   }
 
   animate (): void {

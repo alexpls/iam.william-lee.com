@@ -14,5 +14,8 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "serve": "python -m SimpleHTTPServer 4000"
+  },
+  "dependencies": {
+    "shake.js": "^1.2.2"
   }
 }

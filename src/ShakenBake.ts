@@ -18,6 +18,7 @@ export class ShakenBake {
   }
 
   private shakeEvent (event) {
+    alert('shook')
     this.image.nextImage()
   }
 }

@@ -26,3 +26,8 @@ function toggleAutoLaunch () {
     document.location.hash = ''
   }
 }
+
+// prevent touch scroll
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });

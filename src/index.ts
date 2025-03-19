@@ -1,11 +1,12 @@
-import { WillLauncher } from './WillLauncher'
+import { WillLauncher } from "./WillLauncher"
+
 const AUTO_LAUNCH_HASH = '#auto'
 
 const launcher = new WillLauncher()
 launcher.listenForDomEventsAndLaunchWills()
 launcher.animate()
 
-const autoLaunchElem = document.getElementById('auto-launch')
+const autoLaunchElem = document.getElementById('auto-launch')!
 
 if (document.location.hash === AUTO_LAUNCH_HASH) {
   toggleAutoLaunch()

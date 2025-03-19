@@ -31,10 +31,11 @@ export class Konami {
     document.addEventListener('keydown', this.isKonamiKey.bind(this))
   }
 
-  isKonamiKey (event): void {
+  isKonamiKey (event: any): void {
     const evt = event || window.event
     const key = evt.keyCode ? evt.keyCode : evt.which
     let codeOk = true
+    // @ts-ignore
     this.sequenceDetected.push(key)
     if (this.sequenceDetected.length < this.sequence.length) {
       for (let i = 0, max = this.sequenceDetected.length; i < max; i++) {
@@ -44,6 +45,7 @@ export class Konami {
       }
       if (!codeOk) {
         this.sequenceDetected = []
+        // @ts-ignore
         this.sequenceDetected.push(key)
       }
     } else if (this.sequenceDetected.length === this.sequence.length) {

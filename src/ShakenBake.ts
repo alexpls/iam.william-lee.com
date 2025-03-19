@@ -1,13 +1,13 @@
 import { WillHeadImage } from './WillHeadImage'
-
-const shake = require('shake.js')
+// @ts-ignore
+import * as shake from 'shake.js'
 
 export class ShakenBake {
 
   shakeInstance: any
 
   constructor (private readonly image: WillHeadImage) {
-    this.shakeInstance = new shake({
+    this.shakeInstance = new shake.default({
       threshold: 0,
       timeout: 1000
     })
@@ -17,7 +17,7 @@ export class ShakenBake {
     window.addEventListener('shake', this.shakeEvent.bind(this), false);
   }
 
-  private shakeEvent (event) {
+  private shakeEvent () {
     this.image.nextImage()
   }
 }

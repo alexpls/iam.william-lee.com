@@ -1,7 +1,8 @@
 import { Size } from './Size'
 import { Point } from './Point'
 
-const IMAGES = ['/will.png', './will2.png', './will3.png']
+
+const IMAGES = ['1.png', './2.png', './3.png']
 const DEFAULT_PATH_TO_IMAGE = IMAGES[0]
 
 export class WillHeadImage {

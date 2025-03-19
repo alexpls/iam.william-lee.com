@@ -25,6 +25,7 @@ export class WillLauncher {
       this.image.size,
       this.image.offset,
       new Size(this.canvas.width, this.canvas.height),
+      // @ts-ignore
       this.canvas.getContext('2d')
     )
     this.wills.push(will)
